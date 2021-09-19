@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/msg?createDatabaseIfNotExist=true
+    username: root
+    password: r00t
+  jpa:
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    change-log: classpath:/liquibase/master.xml
+server:
+  port: 8080
+
+application:
+  jwt:
+    secret-key: bKYVUhPxwBt49sHusivFQgCrjLoAxTNu8YiAYYMMFmirv3+EQY5hepxJTiqNw9h2fi0WebqEdo9G2lL43M8zCw==
+    token-validity-in-seconds: 86400
+  cookie-validity-in-seconds: 86400

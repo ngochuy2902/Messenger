@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <property name="now" value="now(3)"/>
+
+    <changeSet id="00000000000000-1" author="msg">
+        <createTable tableName="msg_users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_by" type="varchar(255)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp(3)" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="varchar(255)"/>
+            <column name="updated_at" type="timestamp(3)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="00000000000000-2" author="msg">
+        <createTable tableName="msg_roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="00000000000000-3" author="msg">
+        <createTable tableName="msg_user_roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="msg_user_roles" indexName="idx_user_roles_user_id">
+            <column name="user_id" type="bigint"/>
+        </createIndex>
+        <createIndex tableName="msg_user_roles" indexName="idx_user_roles_role_id">
+            <column name="role_id" type="bigint"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="00000000000000-4" author="msg">
+        <loadData
+                file="liquibase/data/msg_roles.csv"
+                separator=";"
+                tableName="msg_roles"/>
+    </changeSet>
+</databaseChangeLog>
