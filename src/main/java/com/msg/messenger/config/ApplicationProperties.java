@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ApplicationProperties {
 
     private Jwt jwt;
+    private Redis redis;
     private int cookieValidityInSeconds;
 
     @Getter
@@ -17,5 +18,12 @@ public class ApplicationProperties {
     public static class Jwt {
         private String secretKey;
         private long tokenValidityInSeconds;
+    }
+
+    @Getter
+    @Setter
+    public static class Redis {
+        private String hostName;
+        private int port;
     }
 }

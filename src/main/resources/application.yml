@@ -16,3 +16,6 @@ application:
     secret-key: bKYVUhPxwBt49sHusivFQgCrjLoAxTNu8YiAYYMMFmirv3+EQY5hepxJTiqNw9h2fi0WebqEdo9G2lL43M8zCw==
     token-validity-in-seconds: 86400
   cookie-validity-in-seconds: 86400
+  redis:
+    host-name: localhost
+    port: 6379
